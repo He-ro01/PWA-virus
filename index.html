@@ -1,1 +1,48 @@
 <!---->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PWA 1</title>
+  <link rel="manifest" href="manifest.json" />
+  <script>
+    let deferredPrompt;
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+    });
+
+    function triggerInstall() {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt = null;
+      }
+    }
+
+    function openNextPWA() {
+      window.open('https://your-second-pwa.com', '_blank');
+    }
+  </script>
+  <style>
+    body {
+      background: blue;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    button {
+      background: yellow;
+      color: black;
+      font-size: 20px;
+      padding: 1em 2em;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <button onclick="openNextPWA()">Install Next PWA</button>
+</body>
+</html>
