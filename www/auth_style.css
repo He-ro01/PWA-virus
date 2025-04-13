@@ -1,0 +1,71 @@
+/* Common form styles */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  /* Reduced gap between form elements */
+}
+
+#auth-popup {
+  background-color: #151d28;
+  width: 90%;
+  inset: 0px;
+}
+#auth-popup #login-form {
+  width: 100%;
+  inset: 0px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+#auth-popup .input-field-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 0.25px solid #ffffff34;
+  border-radius: 5px;
+}
+#auth-popup .input-field-wrapper button {
+  background-color: rgba(245, 222, 179, 0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 10px;
+  height: 10px;
+}
+#auth-popup .input-field-wrapper .non-input {
+  display: flex;
+  align-items: center;
+  padding: 0px 10px;
+}
+#auth-popup .input-field-wrapper .non-input .material-icons {
+  font-size: 20px;
+  color: #ffffff34;
+}
+#auth-popup input,
+#auth-popup input:focus {
+  margin: 0%;
+  background-color: transparent;
+  border: 0px;
+  outline: none; /* optional: removes blue border on focus */
+}
+
+#auth-popup #login-signup-switcher {
+  width: 100%;
+  padding: 10px 60px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 0.5px solid #ffffff34;
+  box-sizing: border-box;
+}
+
+label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  font-weight: lighter;
+  font-size: 13px;
+}
