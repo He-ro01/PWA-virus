@@ -11,7 +11,7 @@ form {
   width: 90%;
   inset: 0px;
 }
-#auth-popup #login-form {
+#auth-popup form {
   width: 100%;
   inset: 0px;
   display: flex;
@@ -60,11 +60,23 @@ form {
   border-bottom: 0.5px solid #ffffff34;
   box-sizing: border-box;
 }
-
+#auth-popup #requirements {
+  width: 100%;
+}
+#auth-popup .requirement {
+  color: #a3433b;
+  font-weight: lighter;
+  display: flex;
+  font-size: 12px;
+  justify-content: start;
+}
+.requirement .material-icons {
+  font-size: 12px;
+}
 label {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: cent +;
   flex-direction: row;
   font-weight: lighter;
   font-size: 13px;

@@ -285,11 +285,10 @@
         <div class ="popup-element" id ="auth-popup">
             <div id="login-signup-switcher">
                <div id = "left">
-                q
-                   <span>Register</span>
+                   <span id = "register-switcher">Register</span>
                </div>
                <div id = "right">
-                    <span>Login</span>
+                    <span  id = "login-switcher">Login</span>
                </div>
             </div>
             <!-- Login and Signup Section -->
@@ -338,110 +337,64 @@
             </form>
 
 
-        <div id="signup-section" style="display: none;">
-            <div id="top-div">
-                <h2>Sign Up</h2>
-                <button id="switch-to-login">Already Have An Account</button>
-            </div>
-            <form id="signup-form">
-                <div class="signup-field" id="name-section">
-                    <label for="signup-name">Name*</label>
-                    <input type="name" placeholder="John" id="signup-name" required>
-                    <div class="error-text-wrapper">
-                        <span>Error</span>
+      
+            <form id="signup-form" style="display: none;">
+                <div class = "field">
+                    <label for="login-phone">Phone Number</label>
+                    <div class = "input-field-wrapper">
+                        <div class = "non-input" id = "country-code-wrapper">
+                            <span>+234</span>
+                        </div>
+                        
+                        <input type="phone-number" id="login-phone" placeholder="e.g: 9123456789" required>
+                        
                     </div>
                 </div>
-                <div class="signup-field" id="surname-section">
-                    <label for="signup-surname">Surname*</label>
-                    <input type="surname" placeholder="Doe" id="signup-surname" required>
-                    <div class="error-text-wrapper">
-                        <span>Error</span>
+                <div class = "field">
+                    <div class = "input-field-wrapper">
+                        <div class = "non-input" id = "password-icon-wrapper">
+                            <span class = "material-icons">lock</span>
+                        </div>
+                        <input type="password" id="signup_password" placeholder="password" required>
+                        <div class = "non-input" id = "country-code-wrapper">
+                            <button type="button" class="toggle-password">
+                                <span class="material-icons">visibility_off</span>
+                            </button>
+                        </div>
                     </div>
-                </div>
-
-                <div class="signup-field" id="mobile-number-section">
-                    <label for="signup-mobile-number">Mobile Number*</label>
-                    <div class="country-code-wrapper">
-                        <input type="text" id="country-code" value="+234" readonly>
-                        <input type="tel" placeholder="e.g: 8123456789" id="signup-mobile-number"
-                            placeholder="Your mobile number" required>
-                    </div>
-                    <div class="error-text-wrapper">
-                        <span>Error</span>
-                    </div>
-                </div>
-
-                <div class="signup-field" id="email-section">
-                    <label for="signup_email">Email*</label>
-                    <input type="email" placeholder="e.g: user@mail.com" id="signup_email" required>
-                    <div class="error-text-wrapper">
-                        <span>Error</span>
-                    </div>
-                </div>
-
-                <div class="signup-field" id="username-section">
-                    <label for="signup_username">Username*</label>
-                    <input type="text" placeholder="e.g: user" id="signup_username" required>
-                    <div class="error-text-wrapper">
-                        <span>Error</span>
-                    </div>
-                </div>
-
-                <div class="signup-field" id="password-section">
-                    <label for="signup_password">Password*</label>
-                    <div class="password-wrapper">
-                        <input type="password" id="signup_password" required>
-                        <button type="button" class="toggle-password">
-                            <i class="material-icons">visibility_off</i>
-                        </button>
-                        </input>
-                    </div>
-                    <div class="error-text-wrapper">
-                        <span>Error</span>
-                    </div>
+                  
                     <div id="requirements" style="display: none;">
                         <div class="requirement" id="at-least-8-characters">
-                            <input type="checkbox" value="yes">
+                            <span class = "material-icons">check</span>
                             <span>At least 8 characters</span>
                         </div>
                         <div class="requirement" id="one-uppercase-letter">
-                            <input type="checkbox" value="yes">
+                            <span class = "material-icons">check</span>
                             <span>At least 1 uppercase letter</span>
                         </div>
                         <div class="requirement" id="one-number">
-                            <input type="checkbox" value="yes">
+                            <span class = "material-icons">check</span>
                             <span>At least 1 number</span>
                         </div>
                         <div class="requirement" id="one-special-character">
-                            <input type="checkbox" value="yes">
+                            <span class = "material-icons">check</span>
                             <span>At least 1 special character</span>
                         </div>
                     </div>
-
                 </div>
-
-                <div class="signup-field" id="confirm-password-section">
-                    <label for="confirm_password">Confirm Password*</label>
-                    <div class="password-wrapper">
-                        <input type="password" id="confirm_password" required>
-                        <button type="button" class="toggle-password">
-                            <i class="material-icons">visibility_off</i>
-                        </button>
-                    </div>
-                    <div class="error-text-wrapper">
-                        <span>Error</span>
-                    </div>
+                <div class = "submit-button-wrapper">
+                    <button type="submit">
+                        <div class="spinner" style="display: none;">
+                            <svg class="circular" viewBox="25 25 50 50">
+                                <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="4"
+                                    stroke-miterlimit="10" />
+                            </svg>
+                        </div>
+                        <span>Login</span>
+                    </button>
+                    <div id = base>   <span>Customer</span>   <span>Forgot Your Password?</span></div>
                 </div>
-
-                <button id="signupbtn" type="submit">
-                    <div class="spinner" style="display: none;">
-                        <svg class="circular" viewBox="25 25 50 50">
-                            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="4"
-                                stroke-miterlimit="10" />
-                        </svg>
-                    </div>
-                    <span>Sign Up</span>
-                </button>
+             
                 <script>
                     fbq('init', '1208312544287640');
                     fbq('track', 'PageView');
@@ -466,7 +419,6 @@
                 </script>
             </form>
             <!---->
-        </div>
         </div>
         <div class="popup-element" id="game-lobby" style="display: none;">
             <div id="popup-header">

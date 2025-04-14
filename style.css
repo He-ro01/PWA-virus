@@ -303,7 +303,8 @@ header #center {
 }
 
 .game-panel {
-  width: 100px;
+  width: 120px;
+  height: 150px;
   padding: 5px;
   display: flex;
   flex-direction: column;
@@ -346,8 +347,8 @@ header #center {
 .game-panel #thumbnail {
   border-radius: 5px;
   display: flex;
-  height: 100px;
-  width: 100px;
+  width: 120px;
+  height: 120px;
   background-size: cover;
   /* scales the image to fill the div */
   background-position: center;
@@ -404,10 +405,9 @@ header #center {
 .all-games {
   display: grid;
   color: #c3c9ff93;
-  grid-template-columns: repeat(3, auto);
-  gap: 10px;
-  justify-content: center;
+  grid-template-columns: repeat(3, 1fr);
   width: 100%;
+  justify-content: center;
 }
 
 /* Medium screens: 2 columns */
