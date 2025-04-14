@@ -184,8 +184,8 @@
             </div>
         </div>
         <div class="spin-wheel-wrapper">
-            <div id="spin-wheel" data-name="Sparkling Brawl" data-developer="ZIDIT"
-                data-thumbnail="Sparkling-Brawl.jpg" data-type="2-player">
+            <div id="spin-wheel" data-name="Sparkling Brawl" data-developer="ZIDIT" data-thumbnail="Sparkling-Brawl.jpg"
+                data-type="2-player">
                 <div id="right">
                     <div id="wrapper">
                         <span id="sparkling-brawl-text">Sparkling Brawl</span>
@@ -201,7 +201,7 @@
 
         </div>
     </div>
-   
+
     <div class="side-panel" id="profile-menu" style="display: none;">
         <div id=" profile-panel">
             <div id="pfp-wrapper">
@@ -282,46 +282,46 @@
             </div>
             <span>Loading...</span>
         </div>
-        <div class ="popup-element" id ="auth-popup">
+        <div class="popup-element" id="auth-popup">
             <div id="login-signup-switcher">
-               <div id = "left">
-                   <span id = "register-switcher">Register</span>
-               </div>
-               <div id = "right">
-                    <span  id = "login-switcher">Login</span>
-               </div>
+                <div id="left">
+                    <span id="register-switcher">Register</span>
+                </div>
+                <div id="right">
+                    <span id="login-switcher">Login</span>
+                </div>
             </div>
             <!-- Login and Signup Section -->
             <form id="login-form">
-                <div class = "field">
+                <div class="field">
                     <label for="login-phone">Phone Number</label>
-                    <div class = "input-field-wrapper">
-                        <div class = "non-input" id = "country-code-wrapper">
+                    <div class="input-field-wrapper">
+                        <div class="non-input" id="country-code-wrapper">
                             <span>+234</span>
                         </div>
-                        
+
                         <input type="phone-number" id="login-phone" placeholder="e.g: 9123456789" required>
-                        
+
                     </div>
                 </div>
-                <div class = "field">
-                    <div class = "input-field-wrapper">
-                        <div class = "non-input" id = "password-icon-wrapper">
-                            <span class = "material-icons">lock</span>
+                <div class="field">
+                    <div class="input-field-wrapper">
+                        <div class="non-input" id="password-icon-wrapper">
+                            <span class="material-icons">lock</span>
                         </div>
                         <input type="password" id="login_password" placeholder="password" required>
-                        <div class = "non-input" id = "country-code-wrapper">
+                        <div class="non-input" id="country-code-wrapper">
                             <button type="button" class="toggle-password">
                                 <span class="material-icons">visibility_off</span>
                             </button>
                         </div>
                     </div>
-                    <div class = checkbox-wrapper>
+                    <div class=checkbox-wrapper>
                         <input type="checkbox" name="agree" />
                         <span>Remember password</span>
                     </div>
                 </div>
-                <div class = "submit-button-wrapper">
+                <div class="submit-button-wrapper">
                     <button type="submit">
                         <div class="spinner" style="display: none;">
                             <svg class="circular" viewBox="25 25 50 50">
@@ -331,58 +331,45 @@
                         </div>
                         <span>Login</span>
                     </button>
-                    <div id = base>   <span>Customer</span>   <span>Forgot Your Password?</span></div>
+                    <div id=base> <span>Customer</span> <span>Forgot Your Password?</span></div>
                 </div>
-             
+
             </form>
 
 
-      
+
             <form id="signup-form" style="display: none;">
-                <div class = "field">
+                <div class="field">
                     <label for="login-phone">Phone Number</label>
-                    <div class = "input-field-wrapper">
-                        <div class = "non-input" id = "country-code-wrapper">
+                    <div class="input-field-wrapper">
+                        <div class="non-input" id="country-code-wrapper">
                             <span>+234</span>
                         </div>
-                        
+
                         <input type="phone-number" id="login-phone" placeholder="e.g: 9123456789" required>
-                        
+
                     </div>
                 </div>
-                <div class = "field">
-                    <div class = "input-field-wrapper">
-                        <div class = "non-input" id = "password-icon-wrapper">
-                            <span class = "material-icons">lock</span>
+                <div class="field">
+                    <div class="input-field-wrapper">
+                        <div class="non-input" id="password-icon-wrapper">
+                            <span class="material-icons">lock</span>
                         </div>
                         <input type="password" id="signup_password" placeholder="password" required>
-                        <div class = "non-input" id = "country-code-wrapper">
+                        <div class="non-input" id="country-code-wrapper">
                             <button type="button" class="toggle-password">
                                 <span class="material-icons">visibility_off</span>
                             </button>
                         </div>
                     </div>
-                  
-                    <div id="requirements" style="display: none;">
-                        <div class="requirement" id="at-least-8-characters">
-                            <span class = "material-icons">check</span>
-                            <span>At least 8 characters</span>
-                        </div>
-                        <div class="requirement" id="one-uppercase-letter">
-                            <span class = "material-icons">check</span>
-                            <span>At least 1 uppercase letter</span>
-                        </div>
-                        <div class="requirement" id="one-number">
-                            <span class = "material-icons">check</span>
-                            <span>At least 1 number</span>
-                        </div>
-                        <div class="requirement" id="one-special-character">
-                            <span class = "material-icons">check</span>
-                            <span>At least 1 special character</span>
-                        </div>
+
+                    <div id="password-strength-monitor">
+                        <span>Strength</span>
+                        <div class="password-strength-bars"></div>
                     </div>
+
                 </div>
-                <div class = "submit-button-wrapper">
+                <div class="submit-button-wrapper">
                     <button type="submit">
                         <div class="spinner" style="display: none;">
                             <svg class="circular" viewBox="25 25 50 50">
@@ -392,9 +379,9 @@
                         </div>
                         <span>Login</span>
                     </button>
-                    <div id = base>   <span>Customer</span>   <span>Forgot Your Password?</span></div>
+                    <div id=base> <span>Customer</span> <span>Forgot Your Password?</span></div>
                 </div>
-             
+
                 <script>
                     fbq('init', '1208312544287640');
                     fbq('track', 'PageView');
@@ -536,9 +523,9 @@
                 </div>
             </div>
         </div>
-         <div class="popup-closer">
-            <span class = "material-icons">close</span>
-         </div>
+        <div class="popup-closer">
+            <span class="material-icons">close</span>
+        </div>
     </div>
     <div class="footer">
         <div class="logo-column">
@@ -549,7 +536,7 @@
         </div>
 
     </div>
-    <script src = "popups.js"></script>
+    <script src="popups.js"></script>
     <script src="https://js.paystack.co/v1/inline.js"></script>
     <script src="index_script.js"></script>
     <script src="auth_script.js"></script>

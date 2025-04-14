@@ -12,7 +12,7 @@ const AuthSwitcher = (() => {
       signupForm.style.display = "none";
       loginForm.style.display = "flex";
     },
-    init: () => {},
+    init: () => { },
   };
 })();
 
@@ -47,35 +47,42 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  const barsContainer = document.querySelector(".password-strength-bars");
+
   passwordInput.addEventListener("input", () => {
     const password = passwordInput.value;
-    updateRequirement("at-least-8-characters", password.length >= 8);
-    updateRequirement("one-uppercase-letter", /[A-Z]/.test(password));
-    updateRequirement("one-number", /[0-9]/.test(password));
-    updateRequirement(
-      "one-special-character",
-      /[!@#$%^&*(),.?\":{}|<>]/.test(password)
-    );
+    let passwordStrength = 0;
+
+    if (password.length >= 8) passwordStrength++;
+    if (/[A-Z]/.test(password)) passwordStrength++;
+    if (/[0-9]/.test(password)) passwordStrength++;
+    if (/[!@#$%^&*(),.?":{}|<>]/.test(password)) passwordStrength++;
+
+    // Clear previous bars
+    barsContainer.innerHTML = "";
+
+    // Render 4 bars
+    for (let i = 0; i < 4; i++) {
+      const unit = document.createElement("div");
+      unit.classList.add("password-strength-fill-unit");
+      if (i < passwordStrength) {
+
+        if (!passwordStrength > 1)
+          unit.classList.add("red");
+        if (!passwordStrength > 2)
+          unit.classList.add("orange");
+        if (passwordStrength > 2)
+          unit.classList.add("green");
+
+      }
+      barsContainer.appendChild(unit);
+    }
   });
 
-  function updateRequirement(id, isValid) {
-    const el = document.getElementById(id);
-    const checkbox = el.querySelector("input");
-    const label = el.querySelector("span");
-
-    checkbox.checked = isValid;
-    el.classList.toggle("met", isValid);
-    el.classList.toggle("unmet", !isValid);
-    checkbox.style.borderColor = isValid ? "#00cc66" : "#FFD580";
-    label.style.color = isValid ? "#00cc66" : "#FFD580";
-  }
 
   function isPasswordValid(password) {
     return (
-      password.length >= 8 &&
-      /[A-Z]/.test(password) &&
-      /[0-9]/.test(password) &&
-      /[!@#$%^&*(),.?\":{}|<>]/.test(password)
+      password.length >= 8
     );
   }
 
@@ -139,7 +146,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (!isPasswordValid(password)) {
-      showError("password", "Password does not meet all requirements!");
+      showError("password", "password must be 8 digits");
       toggleButtonLoading(signupButton, false);
       return;
     }
