@@ -680,7 +680,6 @@ nav {
 .popup-container button {
   width: 20;
   height: 20;
-  background-color: #00a859;
   color: white;
   border: none;
   border-radius: 5px;
@@ -859,6 +858,7 @@ nav {
 
   padding: 20px;
 }
+
 .popup-closer {
   border-radius: 100%;
   border: 1px solid white;
