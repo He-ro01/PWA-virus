@@ -22,7 +22,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const signupForm = document.getElementById("signup-form");
     const loginForm = document.getElementById("login-form");
     const passwordInput = document.getElementById("signup_password");
-    const requirementsDiv = document.getElementById("requirements");
     const loginSwitch = document.getElementById("login-switcher");
     const signupSwitch = document.getElementById("register-switcher");
 
@@ -37,9 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // ===================== Password Live Check =====================
-    passwordInput.addEventListener("focus", () => {
-        requirementsDiv.style.display = "block";
-    });
+ 
 
     passwordInput.addEventListener("blur", () => {
         if (passwordInput.value.trim() === "") {
@@ -86,20 +83,6 @@ document.addEventListener("DOMContentLoaded", () => {
         );
     }
 
-    function showError(inputId, message) {
-        const section = document.getElementById(`${inputId}-section`);
-        const errorWrapper = section.querySelector(".error-text-wrapper");
-        errorWrapper.querySelector("span").textContent = message;
-        errorWrapper.style.display = "block";
-    }
-
-    function hideError(inputId) {
-        const section = document.getElementById(`${inputId}-section`);
-        const errorWrapper = section.querySelector(".error-text-wrapper");
-        errorWrapper.querySelector("span").textContent = "";
-        errorWrapper.style.display = "none";
-    }
-
     // ===================== TOGGLER: Button Spinner =====================
     function toggleButtonLoading(button, isLoading) {
         const spinner = button.querySelector(".spinner");
@@ -118,35 +101,21 @@ document.addEventListener("DOMContentLoaded", () => {
         const signupButton = signupForm.querySelector("button[type='submit']");
         toggleButtonLoading(signupButton, true);
 
-        const fieldsToReset = [
-            "name",
-            "surname",
-            "mobile-number",
-            "email",
-            "username",
-            "password",
-            "confirm-password",
-        ];
-        fieldsToReset.forEach((id) => hideError(id));
 
-        const name = document.getElementById("signup-name").value.trim();
-        const surname = document.getElementById("signup-surname").value.trim();
         const mobileInput = document
             .getElementById("signup-mobile-number")
             .value.trim();
-        const email = document.getElementById("signup_email").value.trim();
-        const username = document.getElementById("signup_username").value.trim();
+
         const password = passwordInput.value;
-        const confirmPassword = document.getElementById("confirm_password").value;
+        const confirmPassword = document.getElementById("confirm-password").value;
+        displayInputError(passwordInput, password !== confirmPassword, "Passwords dont match")
 
         if (password !== confirmPassword) {
-            showError("confirm-password", "Passwords do not match!");
             toggleButtonLoading(signupButton, false);
             return;
         }
-
+        displayInputError(passwordInput,!isPasswordValid(password),"password must be 8 digits" )
         if (!isPasswordValid(password)) {
-            showError("password", "password must be 8 digits");
             toggleButtonLoading(signupButton, false);
             return;
         }
@@ -156,26 +125,10 @@ document.addEventListener("DOMContentLoaded", () => {
             : mobileInput;
 
         try {
-            const apiKey = "06fe1e1d6ace4db98abd42b19f2d5ecb";
-            const emailCheckRes = await fetch(
-                `https://emailvalidation.abstractapi.com/v1/?api_key=${apiKey}&email=${encodeURIComponent(
-                    email
-                )}`
-            );
-            const emailData = await emailCheckRes.json();
-
-            if (emailData.deliverability !== "DELIVERABLE") {
-                showError("email", "Email is not deliverable.");
-                toggleButtonLoading(signupButton, false);
-                return;
-            }
 
             const data = {
-                name,
-                surname,
+               
                 mobileNumber: formattedMobileNumber,
-                username,
-                email,
                 password,
             };
 
@@ -212,7 +165,7 @@ document.addEventListener("DOMContentLoaded", () => {
         toggleButtonLoading(loginButton, true);
 
         const data = {
-            email: document.getElementById("login_email").value,
+            email: document.getElementById("login-phone").value,
             password: document.getElementById("login_password").value,
         };
 
@@ -249,3 +202,46 @@ document.addEventListener("DOMContentLoaded", () => {
         location.reload();
     });
 });
+
+function displayInputError(startElement, show, error) {
+    if (!startElement) return;
+
+    // Climb up DOM to find the nearest parent with class "field"
+    let fieldElement = startElement;
+    while (fieldElement && !fieldElement.classList.contains("field")) {
+        fieldElement = fieldElement.parentElement;
+    }
+
+    // If no .field found, use the original element
+    const field = fieldElement || startElement;
+    const wrapper = field.querySelector(".input-field-wrapper");
+    let errorDiv = field.querySelector(".input-error");
+
+    if (show) {
+        if (!errorDiv) {
+            errorDiv = document.createElement("div");
+            errorDiv.className = "input-error";
+            errorDiv.innerHTML = `
+                <span class="material-icons">error</span>
+                <span></span>
+            `;
+        }
+
+        const errorText = errorDiv.querySelector("span:last-child");
+        errorText.textContent = error;
+        errorDiv.style.display = "flex";
+
+        // Only insert if not already in the DOM
+        if (!field.contains(errorDiv)) {
+            if (wrapper) {
+                wrapper.insertAdjacentElement("afterend", errorDiv);
+            } else {
+                field.appendChild(errorDiv);
+            }
+        }
+    } else {
+        if (errorDiv) {
+            errorDiv.remove();
+        }
+    }
+}
