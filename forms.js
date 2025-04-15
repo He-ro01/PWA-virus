@@ -1,251 +1,251 @@
 // =================== Auth Switcher ===================
 const AuthSwitcher = (() => {
-  const loginForm = document.getElementById("login-form");
-  const signupForm = document.getElementById("signup-form");
+    const loginForm = document.getElementById("login-form");
+    const signupForm = document.getElementById("signup-form");
 
-  return {
-    ShowSignup: () => {
-      signupForm.style.display = "flex";
-      loginForm.style.display = "none";
-    },
-    ShowLogin: () => {
-      signupForm.style.display = "none";
-      loginForm.style.display = "flex";
-    },
-    init: () => { },
-  };
+    return {
+        ShowSignup: () => {
+            signupForm.style.display = "flex";
+            loginForm.style.display = "none";
+        },
+        ShowLogin: () => {
+            signupForm.style.display = "none";
+            loginForm.style.display = "flex";
+        },
+        init: () => { },
+    };
 })();
 
 // =================== Main Script ===================
 document.addEventListener("DOMContentLoaded", () => {
-  // Elements
-  const signupForm = document.getElementById("signup-form");
-  const loginForm = document.getElementById("login-form");
-  const passwordInput = document.getElementById("signup_password");
-  const requirementsDiv = document.getElementById("requirements");
-  const loginSwitch = document.getElementById("login-switcher");
-  const signupSwitch = document.getElementById("register-switcher");
+    // Elements
+    const signupForm = document.getElementById("signup-form");
+    const loginForm = document.getElementById("login-form");
+    const passwordInput = document.getElementById("signup_password");
+    const requirementsDiv = document.getElementById("requirements");
+    const loginSwitch = document.getElementById("login-switcher");
+    const signupSwitch = document.getElementById("register-switcher");
 
-  AuthSwitcher.init();
+    AuthSwitcher.init();
 
-  loginSwitch.addEventListener("click", () => {
-    AuthSwitcher.ShowLogin();
-  });
+    loginSwitch.addEventListener("click", () => {
+        AuthSwitcher.ShowLogin();
+    });
 
-  signupSwitch.addEventListener("click", () => {
-    AuthSwitcher.ShowSignup();
-  });
+    signupSwitch.addEventListener("click", () => {
+        AuthSwitcher.ShowSignup();
+    });
 
-  // ===================== Password Live Check =====================
-  passwordInput.addEventListener("focus", () => {
-    requirementsDiv.style.display = "block";
-  });
+    // ===================== Password Live Check =====================
+    passwordInput.addEventListener("focus", () => {
+        requirementsDiv.style.display = "block";
+    });
 
-  passwordInput.addEventListener("blur", () => {
-    if (passwordInput.value.trim() === "") {
-      requirementsDiv.style.display = "none";
-    }
-  });
+    passwordInput.addEventListener("blur", () => {
+        if (passwordInput.value.trim() === "") {
+            requirementsDiv.style.display = "none";
+        }
+    });
 
-  const barsContainer = document.querySelector(".password-strength-bars");
+    const barsContainer = document.querySelector(".password-strength-bars");
 
-  passwordInput.addEventListener("input", () => {
-    const password = passwordInput.value;
-    let passwordStrength = 0;
+    passwordInput.addEventListener("input", () => {
+        const password = passwordInput.value;
+        let passwordStrength = 0;
 
-    if (password.length >= 8) passwordStrength++;
-    if (/[A-Z]/.test(password)) passwordStrength++;
-    if (/[0-9]/.test(password)) passwordStrength++;
-    if (/[!@#$%^&*(),.?":{}|<>]/.test(password)) passwordStrength++;
+        if (password.length >= 8) passwordStrength++;
+        if (/[A-Z]/.test(password)) passwordStrength++;
+        if (/[0-9]/.test(password)) passwordStrength++;
+        if (/[!@#$%^&*(),.?":{}|<>]/.test(password)) passwordStrength++;
 
-    // Clear previous bars
-    barsContainer.innerHTML = "";
+        barsContainer.innerHTML = "";
 
-    // Render 4 bars
-    for (let i = 0; i < 4; i++) {
-      const unit = document.createElement("div");
-      unit.classList.add("password-strength-fill-unit");
-      if (i < passwordStrength) {
+        for (let i = 0; i < 4; i++) {
+            const unit = document.createElement("div");
+            unit.classList.add("password-strength-fill-unit");
 
-        if (!passwordStrength > 1)
-          unit.classList.add("red");
-        if (!passwordStrength > 2)
-          unit.classList.add("orange");
-        if (passwordStrength > 2)
-          unit.classList.add("green");
+            if (i < passwordStrength) {
+                if (passwordStrength <= 1) {
+                    unit.classList.add("red");
+                } else if (passwordStrength === 2) {
+                    unit.classList.add("orange");
+                } else if (passwordStrength >= 3) {
+                    unit.classList.add("green");
+                }
+            }
 
-      }
-      barsContainer.appendChild(unit);
-    }
-  });
+            barsContainer.appendChild(unit);
+        }
+    });
 
 
-  function isPasswordValid(password) {
-    return (
-      password.length >= 8
-    );
-  }
 
-  function showError(inputId, message) {
-    const section = document.getElementById(`${inputId}-section`);
-    const errorWrapper = section.querySelector(".error-text-wrapper");
-    errorWrapper.querySelector("span").textContent = message;
-    errorWrapper.style.display = "block";
-  }
-
-  function hideError(inputId) {
-    const section = document.getElementById(`${inputId}-section`);
-    const errorWrapper = section.querySelector(".error-text-wrapper");
-    errorWrapper.querySelector("span").textContent = "";
-    errorWrapper.style.display = "none";
-  }
-
-  // ===================== TOGGLER: Button Spinner =====================
-  function toggleButtonLoading(button, isLoading) {
-    const spinner = button.querySelector(".spinner");
-    const span = button.querySelector("span");
-    if (spinner && span) {
-      spinner.style.display = isLoading ? "inline-block" : "none";
-      span.style.display = isLoading ? "none" : "inline";
-      button.disabled = isLoading;
-    }
-  }
-
-  // ===================== SIGNUP =====================
-  signupForm?.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    const signupButton = signupForm.querySelector("button[type='submit']");
-    toggleButtonLoading(signupButton, true);
-
-    const fieldsToReset = [
-      "name",
-      "surname",
-      "mobile-number",
-      "email",
-      "username",
-      "password",
-      "confirm-password",
-    ];
-    fieldsToReset.forEach((id) => hideError(id));
-
-    const name = document.getElementById("signup-name").value.trim();
-    const surname = document.getElementById("signup-surname").value.trim();
-    const mobileInput = document
-      .getElementById("signup-mobile-number")
-      .value.trim();
-    const email = document.getElementById("signup_email").value.trim();
-    const username = document.getElementById("signup_username").value.trim();
-    const password = passwordInput.value;
-    const confirmPassword = document.getElementById("confirm_password").value;
-
-    if (password !== confirmPassword) {
-      showError("confirm-password", "Passwords do not match!");
-      toggleButtonLoading(signupButton, false);
-      return;
+    function isPasswordValid(password) {
+        return (
+            password.length >= 8
+        );
     }
 
-    if (!isPasswordValid(password)) {
-      showError("password", "password must be 8 digits");
-      toggleButtonLoading(signupButton, false);
-      return;
+    function showError(inputId, message) {
+        const section = document.getElementById(`${inputId}-section`);
+        const errorWrapper = section.querySelector(".error-text-wrapper");
+        errorWrapper.querySelector("span").textContent = message;
+        errorWrapper.style.display = "block";
     }
 
-    let formattedMobileNumber = mobileInput.startsWith("0")
-      ? "234" + mobileInput.slice(1)
-      : mobileInput;
+    function hideError(inputId) {
+        const section = document.getElementById(`${inputId}-section`);
+        const errorWrapper = section.querySelector(".error-text-wrapper");
+        errorWrapper.querySelector("span").textContent = "";
+        errorWrapper.style.display = "none";
+    }
 
-    try {
-      const apiKey = "06fe1e1d6ace4db98abd42b19f2d5ecb";
-      const emailCheckRes = await fetch(
-        `https://emailvalidation.abstractapi.com/v1/?api_key=${apiKey}&email=${encodeURIComponent(
-          email
-        )}`
-      );
-      const emailData = await emailCheckRes.json();
+    // ===================== TOGGLER: Button Spinner =====================
+    function toggleButtonLoading(button, isLoading) {
+        const spinner = button.querySelector(".spinner");
+        const span = button.querySelector("span");
+        if (spinner && span) {
+            spinner.style.display = isLoading ? "inline-block" : "none";
+            span.style.display = isLoading ? "none" : "inline";
+            button.disabled = isLoading;
+        }
+    }
 
-      if (emailData.deliverability !== "DELIVERABLE") {
-        showError("email", "Email is not deliverable.");
+    // ===================== SIGNUP =====================
+    signupForm?.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const signupButton = signupForm.querySelector("button[type='submit']");
+        toggleButtonLoading(signupButton, true);
+
+        const fieldsToReset = [
+            "name",
+            "surname",
+            "mobile-number",
+            "email",
+            "username",
+            "password",
+            "confirm-password",
+        ];
+        fieldsToReset.forEach((id) => hideError(id));
+
+        const name = document.getElementById("signup-name").value.trim();
+        const surname = document.getElementById("signup-surname").value.trim();
+        const mobileInput = document
+            .getElementById("signup-mobile-number")
+            .value.trim();
+        const email = document.getElementById("signup_email").value.trim();
+        const username = document.getElementById("signup_username").value.trim();
+        const password = passwordInput.value;
+        const confirmPassword = document.getElementById("confirm_password").value;
+
+        if (password !== confirmPassword) {
+            showError("confirm-password", "Passwords do not match!");
+            toggleButtonLoading(signupButton, false);
+            return;
+        }
+
+        if (!isPasswordValid(password)) {
+            showError("password", "password must be 8 digits");
+            toggleButtonLoading(signupButton, false);
+            return;
+        }
+
+        let formattedMobileNumber = mobileInput.startsWith("0")
+            ? "234" + mobileInput.slice(1)
+            : mobileInput;
+
+        try {
+            const apiKey = "06fe1e1d6ace4db98abd42b19f2d5ecb";
+            const emailCheckRes = await fetch(
+                `https://emailvalidation.abstractapi.com/v1/?api_key=${apiKey}&email=${encodeURIComponent(
+                    email
+                )}`
+            );
+            const emailData = await emailCheckRes.json();
+
+            if (emailData.deliverability !== "DELIVERABLE") {
+                showError("email", "Email is not deliverable.");
+                toggleButtonLoading(signupButton, false);
+                return;
+            }
+
+            const data = {
+                name,
+                surname,
+                mobileNumber: formattedMobileNumber,
+                username,
+                email,
+                password,
+            };
+
+            const res = await fetch(`${API_BASE_URL}/auth/register`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data),
+            });
+
+            const result = await res.json();
+
+            if (res.ok) {
+                localStorage.setItem("zd_token", result.token);
+                alert("Signup successful!");
+                console.log("Token:", result.token);
+                signupForm.reset();
+                location.reload();
+            } else {
+                showError("username", result.error || "Signup failed.");
+            }
+        } catch (err) {
+            console.error("Signup error:", err);
+            alert("Something went wrong!");
+        }
+
         toggleButtonLoading(signupButton, false);
-        return;
-      }
+    });
 
-      const data = {
-        name,
-        surname,
-        mobileNumber: formattedMobileNumber,
-        username,
-        email,
-        password,
-      };
+    // ===================== LOGIN =====================
+    loginForm?.addEventListener("submit", async (e) => {
+        e.preventDefault();
 
-      const res = await fetch(`${API_BASE_URL}/auth/register`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
+        const loginButton = loginForm.querySelector("button[type='submit']");
+        toggleButtonLoading(loginButton, true);
 
-      const result = await res.json();
+        const data = {
+            email: document.getElementById("login_email").value,
+            password: document.getElementById("login_password").value,
+        };
 
-      if (res.ok) {
-        localStorage.setItem("zd_token", result.token);
-        alert("Signup successful!");
-        console.log("Token:", result.token);
-        signupForm.reset();
+        try {
+            const res = await fetch(`${API_BASE_URL}/auth/login`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data),
+            });
+
+            const result = await res.json();
+
+            if (res.ok) {
+                localStorage.setItem("zd_token", result.token);
+                alert("Login successful");
+                console.log("User:", result.user);
+                loginForm.reset();
+                location.reload();
+            } else {
+                alert(result.message || "Login failed.");
+            }
+        } catch (err) {
+            console.error("Login error:", err);
+            alert("Something went wrong!");
+        }
+
+        toggleButtonLoading(loginButton, false);
+    });
+
+    // ===================== LOGOUT =====================
+    document.getElementById("logout-button")?.addEventListener("click", () => {
+        localStorage.removeItem("zd_token");
+        sessionStorage.removeItem("zd_token");
         location.reload();
-      } else {
-        showError("username", result.error || "Signup failed.");
-      }
-    } catch (err) {
-      console.error("Signup error:", err);
-      alert("Something went wrong!");
-    }
-
-    toggleButtonLoading(signupButton, false);
-  });
-
-  // ===================== LOGIN =====================
-  loginForm?.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    const loginButton = loginForm.querySelector("button[type='submit']");
-    toggleButtonLoading(loginButton, true);
-
-    const data = {
-      email: document.getElementById("login_email").value,
-      password: document.getElementById("login_password").value,
-    };
-
-    try {
-      const res = await fetch(`${API_BASE_URL}/auth/login`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      });
-
-      const result = await res.json();
-
-      if (res.ok) {
-        localStorage.setItem("zd_token", result.token);
-        alert("Login successful");
-        console.log("User:", result.user);
-        loginForm.reset();
-        location.reload();
-      } else {
-        alert(result.message || "Login failed.");
-      }
-    } catch (err) {
-      console.error("Login error:", err);
-      alert("Something went wrong!");
-    }
-
-    toggleButtonLoading(loginButton, false);
-  });
-
-  // ===================== LOGOUT =====================
-  document.getElementById("logout-button")?.addEventListener("click", () => {
-    localStorage.removeItem("zd_token");
-    sessionStorage.removeItem("zd_token");
-    location.reload();
-  });
+    });
 });

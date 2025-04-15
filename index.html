@@ -297,9 +297,13 @@
                     <label for="login-phone">Phone Number</label>
                     <div class="input-field-wrapper">
                         <div class="non-input" id="country-code-wrapper">
+                            <div class="nigerian-logo">
+                                <img src="flag.png" alt="Nigerian Flag" />
+                            </div>
                             <span>+234</span>
-                        </div>
 
+                        </div>
+                        <span class="red-star">*</span>
                         <input type="phone-number" id="login-phone" placeholder="e.g: 9123456789" required>
 
                     </div>
@@ -309,6 +313,7 @@
                         <div class="non-input" id="password-icon-wrapper">
                             <span class="material-icons">lock</span>
                         </div>
+                        <span class="red-star">*</span>
                         <input type="password" id="login_password" placeholder="password" required>
                         <div class="non-input" id="country-code-wrapper">
                             <button type="button" class="toggle-password">
@@ -339,22 +344,23 @@
 
 
             <form id="signup-form" style="display: none;">
-                <div class="field">
+                <div class="field" id="phone-number">
                     <label for="login-phone">Phone Number</label>
                     <div class="input-field-wrapper">
                         <div class="non-input" id="country-code-wrapper">
                             <span>+234</span>
                         </div>
-
+                        <span class="red-star">*</span>
                         <input type="phone-number" id="login-phone" placeholder="e.g: 9123456789" required>
 
                     </div>
                 </div>
-                <div class="field">
+                <div class="field" id="password">
                     <div class="input-field-wrapper">
                         <div class="non-input" id="password-icon-wrapper">
                             <span class="material-icons">lock</span>
                         </div>
+                        <span class="red-star">*</span>
                         <input type="password" id="signup_password" placeholder="password" required>
                         <div class="non-input" id="country-code-wrapper">
                             <button type="button" class="toggle-password">
@@ -362,12 +368,44 @@
                             </button>
                         </div>
                     </div>
-
+                    <div class="input-error">
+                        <span class = "material-icons">error</span>
+                        <span>input error</span>
+                    </div>
                     <div id="password-strength-monitor">
                         <span>Strength</span>
                         <div class="password-strength-bars"></div>
                     </div>
 
+                </div>
+                <div class="field" id="confirm-password">
+                    <div class="input-field-wrapper">
+                        <div class="non-input" id="password-icon-wrapper">
+                            <span class="material-icons">lock</span>
+                        </div>
+                        <span class="red-star">*</span>
+                        <input type="password" id="confirm-password" placeholder="please confirm password" required>
+                        <div class="non-input" id="country-code-wrapper">
+                            <button type="button" class="toggle-password">
+                                <span class="material-icons">visibility_off</span>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="field" id="select-currency">
+                    <div class="input-field-wrapper" id="currency-input">
+                        <div class="nigerian-logo">
+                            <img src="flag.png" alt="Nigerian Flag" />
+                        </div>
+                        <span>NGN(Nigerian Naira)</span>
+                    </div>
+                    <span id="currency-disclaimer">The currency determines third-party games and payments and cannot be
+                        changed.</span>
+                </div>
+                <div class=checkbox-wrapper id="age-agreement">
+                    <input type="checkbox" name="agree" />
+                    <span>I am over 18 years old</span>
                 </div>
                 <div class="submit-button-wrapper">
                     <button type="submit">
@@ -377,7 +415,7 @@
                                     stroke-miterlimit="10" />
                             </svg>
                         </div>
-                        <span>Login</span>
+                        <span>Register</span>
                     </button>
                     <div id=base> <span>Customer</span> <span>Forgot Your Password?</span></div>
                 </div>

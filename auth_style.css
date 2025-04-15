@@ -39,10 +39,29 @@ form {
   height: 10px;
 }
 
+.input-error {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  gap: 5px;
+  font-size: 15px;
+  align-items: center;
+  color:#ff2f0b;
+}
+
+.input-error .material-icons {
+  font-size: 15px;
+}
+
 #auth-popup .input-field-wrapper .non-input {
   display: flex;
   align-items: center;
   padding: 0px 10px;
+  gap: 3px;
+}
+
+.red-star {
+  color: #ff2f0b;
 }
 
 #auth-popup .input-field-wrapper .non-input .material-icons {
@@ -92,20 +111,51 @@ form {
   transition: background-color 0.3s ease;
 }
 
-.password-strength-fill-unit.filled {
-  background-color: green;
-}
-
-
-
 .password-strength-fill-unit.red {
   background-color: red;
 }
+
 .password-strength-fill-unit.orange {
   background-color: orange;
 }
+
 .password-strength-fill-unit.green {
   background-color: rgb(0, 255, 0);
+}
+
+#currency-input {
+  background-color: rgba(0, 0, 0, 0.397);
+  height: 35px;
+  display: flex;
+  justify-content: flex-start;
+  /* aligns items to the left */
+  align-items: center;
+  /* vertically centers image & text */
+  gap: 6px;
+  /* adds spacing between image and text */
+  padding-left: 10px;
+  /* optional: space from the left edge */
+  border-radius: 5px;
+  /* optional: make it look smoother */
+}
+
+.nigerian-logo img {
+  width: 20px;
+  height: 20px;
+  display: block;
+  /* removes inline image spacing */
+  border-radius: 100%;
+}
+
+#currency-disclaimer {
+  color: #ffaa29;
+  font-size: 12px;
+}
+
+#age-agreement span {
+  font-size: 15px;
+  color: #d4d4d462;
+
 }
 
 label {
